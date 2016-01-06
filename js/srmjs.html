@@ -157,6 +157,7 @@
             console.error(text);
           }
         },
+        /*
         canvas: (function() {
           var canvas = document.getElementById('canvas');
 
@@ -167,6 +168,7 @@
 
           return canvas;
         })(),
+        */
         setStatus: function(text) {
           if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
           if (text === Module.setStatus.text) return;
