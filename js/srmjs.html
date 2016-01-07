@@ -132,19 +132,27 @@
 <span> latitude: <input type='number' id='latitude1' size='3' min='-90' max='90'>degrees</span>
 <span> longitude: <input type='number' id='longitude1' size='3' min='0' max='360'>degrees</span>
 <span> elevation: <input type='number' id='elevation1' size='3'>meter</span>
-<fieldset>
+<button>update</button>
+</fieldset>
 </form>
-<div> Output datum and coordinates: </div>
+<form> 
+<fieldset> <legend> Output datum and coordinates </legend>
 <span> ORM code: <input type='number' id='orm2' size='3' default='250' placeholder='250'></span>
 <span> RT code: <input type='number' id='rt2' size='3'default='341' placeholder='341'></span>
 <span> latitude: <input type='number' id='latitude2' size='3' min='-90' max='90'>degrees</span>
 <span> longitude: <input type='number' id='longitude2' size='3' min='0' max='360'>degrees</span>
 <span> elevation: <input type='number' id='elevation2' size='3'>meter</span>
-<div> Input celestiocentric coordinates: </div>
+<button>update</button>
+</fieldset>
+</form>
+<form>
+  <fieldset>
+<legend> Input celestiocentric coordinates: </legend>
 <span> X: <input type='number' id='x1' readonly> meter</span>
 <span> Y: <input type='number' id='y1' readonly> meter</span>
 <span> Z: <input type='number' id='z1' readonly> meter</span>
-
+</fieldset>
+</form>
 
     <script type='text/javascript'>
       var statusElement = document.getElementById('status');
