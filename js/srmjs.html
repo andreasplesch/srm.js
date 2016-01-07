@@ -133,7 +133,7 @@
     <textarea id="output" rows="8"></textarea>
 -->
 <h1>Datum to datum projection via srm </h1>
-<form>
+<form id='coord_in'>
 <fieldset> <legend>Input datum and coordinates</legend>
 <span> ORM code: <input class='ddd' type='number' id='orm1' size='3' default='250' placeholder='250'></span>
 <span> RT code: <input class='ddd' type='number' id='rt1' size='3' default='341' placeholder='341'></span>
@@ -143,7 +143,7 @@
 <button>update</button>
 </fieldset>
 </form>
-<form> 
+<form id='coord_out'> 
 <fieldset> <legend> Output datum and coordinates </legend>
 <span> ORM code: <input class='ddd' type='number' id='orm2' size='3' default='250' placeholder='250'></span>
 <span> RT code: <input class='ddd' type='number' id='rt2' size='3'default='341' placeholder='341'></span>
