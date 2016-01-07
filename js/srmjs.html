@@ -145,8 +145,8 @@
 </form>
 <form id='coord_out'> 
 <fieldset> <legend> Output datum and coordinates </legend>
-<span> ORM code: <input class='ddd' type='number' id='orm2' size='3' default='250' placeholder='250'></span>
-<span> RT code: <input class='ddd' type='number' id='rt2' size='3'default='341' placeholder='341'></span>
+<span> ORM code: <input class='ddd' type='number' id='orm2' size='3' default='162' placeholder='162'></span>
+<span> RT code: <input class='ddd' type='number' id='rt2' size='3'default='193' placeholder='193'></span>
 <span> latitude: <input class='ddd' type='number' id='latitude2' size='3' min='-90' max='90'>degrees</span>
 <span> longitude: <input class='ddd' type='number' id='longitude2' size='3' min='0' max='360'>degrees</span>
 <span> elevation: <input class='ddd' type='number' id='elevation2' size='3'>meter</span>
@@ -264,15 +264,41 @@
 
 </script>
 <script>
+  var orm1El = document.getElementById('orm1');
+  var rt1El = document.getElementById('rt1');
   var lat1El = document.getElementById('latitude1');
   var long1El = document.getElementById('longitude1');
   var ele1El = document.getElementById('elevation1');
   var lat2El = document.getElementById('latitude2');
   var long2El = document.getElementById('longitude2');
   var ele2El = document.getElementById('elevation2');
+  var orm2El = document.getElementById('orm2');
+  var rt2El = document.getElementById('rt2');
+  var deg2rad = Math.PI/180;
+  
   function inputchanged(event) {
-    lat2El.value = lat1El.value + 1;
+    var orm1 = orm1El.valueAsNumber;
+    var rt1 = rt1El.valueAsNumber;
+    var lat1 = lat1El.valueAsNumber * deg2rad;
+    var long1 = long1El.valueAsNumber * deg2rad;
+    var ele1 = ele1El.valueAsNumber;
+    var orm2 = orm2El.valueAsNumber;
+    var rt2 = rt2El.valueAsNumber;
+    var CD2 = CD2CD(orm1, rt1, long1, lat1, ele1, orm2, rt2);
+    lat2El.value = CD2.lat /  deg2rad;
+    long2El.value = CD2.long / deg2rad;
+    ele2El.value = CD2.ele;
   }
+  
+  function CD2CD (orm1, rt1, long1, lat1, ele1, orm2, rt2) {
+    var CD = [];
+    var cd1Srf = Module.SRF_Celestiodetic.prototype.create(orm1, rt1);
+    var cd2Srf = Module.SRF_Celestiodetic.prototype.create(orm2, rt2);
+    var cd1Coord = cd1Srf.createCoordinate3D(long1, lat1, ele1);
+    var CoordCD1 = Module.castObject(cd1Coord, Coord3D_Celestiodetic);
+    
+  }
+  
   
 </script>
         
