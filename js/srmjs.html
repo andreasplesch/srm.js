@@ -291,7 +291,7 @@
   }
   
   function CD2CD (orm1, rt1, long1, lat1, ele1, orm2, rt2) {
-    var CD = [];
+    var CD = {};
     var cd1Srf = Module.SRF_Celestiodetic.prototype.create(orm1, rt1);
     var cd2Srf = Module.SRF_Celestiodetic.prototype.create(orm2, rt2);
     var cd1Coord = cd1Srf.createCoordinate3D(long1, lat1, ele1);
