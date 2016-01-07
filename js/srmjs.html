@@ -133,7 +133,7 @@
     <textarea id="output" rows="8"></textarea>
 -->
 <h1>Datum to datum projection via srm </h1>
-<form id='coord_in'>
+<form id='coord_in' onchange='inputchanged(event);'>
 <fieldset> <legend>Input datum and coordinates</legend>
 <span> ORM code: <input class='ddd' type='number' id='orm1' size='3' default='250' placeholder='250'></span>
 <span> RT code: <input class='ddd' type='number' id='rt1' size='3' default='341' placeholder='341'></span>
@@ -262,6 +262,18 @@
         script.src = "srmjs.js";
         document.body.appendChild(script);
 
+</script>
+<script>
+  var lat1El = document.getElementById('latitude1');
+  var long1El = document.getElementById('longitude1');
+  var ele1El = document.getElementById('elevation1');
+  var lat2El = document.getElementById('latitude2');
+  var long2El = document.getElementById('longitude2');
+  var ele2El = document.getElementById('elevation2');
+  function inputchanged(event) {
+    lat2El.value = lat1El.value + 1;
+  }
+  
 </script>
         
 <script>
