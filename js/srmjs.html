@@ -125,9 +125,19 @@
     <textarea id="output" rows="8"></textarea>
 -->
 <h1>Datum to datum projection via srm </h1>
-<div> Input coordinates: </div>
-<span> latitude: <input type='number' id='latitude' min='-90' max='90'></span>
-<span> longitude: <input type='number' id='longitude' min='0' max='360'></span>
+<div> Input datum and coordinates: </div>
+<span> ORM code: <input type='number' id='orm1' default='250'></span>
+<span> RT code: <input type='number' id='rt1' default='341'></span>
+<span> latitude: <input type='number' id='latitude1' min='-90' max='90'></span>
+<span> longitude: <input type='number' id='longitude1' min='0' max='360'></span>
+<span> elevation: <input type='number' id='elevation1'></span>
+<div> Output datum and coordinates: </div>
+<span> ORM code: <input type='number' id='orm2' default='250'></span>
+<span> RT code: <input type='number' id='rt2' default='341'></span>
+<span> latitude: <input type='number' id='latitude2' min='-90' max='90'></span>
+<span> longitude: <input type='number' id='longitude2' min='0' max='360'></span>
+<span> elevation: <input type='number' id='elevation2'></span>
+
 
     <script type='text/javascript'>
       var statusElement = document.getElementById('status');
