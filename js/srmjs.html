@@ -295,8 +295,14 @@
     var cd1Srf = Module.SRF_Celestiodetic.prototype.create(orm1, rt1);
     var cd2Srf = Module.SRF_Celestiodetic.prototype.create(orm2, rt2);
     var cd1Coord = cd1Srf.createCoordinate3D(long1, lat1, ele1);
-    var CoordCD1 = Module.castObject(cd1Coord, Coord3D_Celestiodetic);
-    
+    var cd2Coord = cd2Srf.createCoordinate3D();
+    cd2Srf.changeCoordinate3DSRF(cd1Coord, cd2Coord);
+    var CoordCD2 = Module.castObject(cd2Coord, Coord3D_Celestiodetic);
+    CD.long = CoordCD2.get_longitude();
+    CD.lat = CoordCD2.get_latitude();
+    CD.ele = CoordCD2.get_ellipsoidal_height();
+    //release srfs
+    return CD;
   }
   
   
