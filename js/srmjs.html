@@ -99,6 +99,10 @@
         font-family: 'Lucida Console', Monaco, monospace;
         outline: none;
       }
+      
+      .3digits {
+        width: 4em;
+      }
     </style>
   </head>
   <body>
@@ -137,7 +141,7 @@
 </form>
 <form> 
 <fieldset> <legend> Output datum and coordinates </legend>
-<span> ORM code: <input type='number' id='orm2' size='3' default='250' placeholder='250'></span>
+<span> ORM code: <input class='3digits' type='number' id='orm2' size='3' default='250' placeholder='250'></span>
 <span> RT code: <input type='number' id='rt2' size='3'default='341' placeholder='341'></span>
 <span> latitude: <input type='number' id='latitude2' size='3' min='-90' max='90'>degrees</span>
 <span> longitude: <input type='number' id='longitude2' size='3' min='0' max='360'>degrees</span>
