@@ -166,6 +166,14 @@
 <span> Z: <input type='number' id='z1' readonly> meter</span>
 </fieldset>
 </form>
+<form>
+  <fieldset>
+<legend> Output celestiocentric coordinates: </legend>
+<span> X: <input type='number' id='x2' readonly> meter</span>
+<span> Y: <input type='number' id='y2' readonly> meter</span>
+<span> Z: <input type='number' id='zz' readonly> meter</span>
+</fieldset>
+</form>
 <textarea class="bigtable">
 RT CODE                ORM CODE
 -------------------------------
@@ -626,6 +634,13 @@ ZANDERIJ_1987_SURINAME 343
   var ele2El = document.getElementById('elevation2');
   var orm2El = document.getElementById('orm2');
   var rt2El = document.getElementById('rt2');
+  var x1El = document.getElementById('x1');
+  var y1El = document.getElementById('y1');
+  var z1El = document.getElementById('z1');
+  var x2El = document.getElementById('x2');
+  var y2El = document.getElementById('y2');
+  var z2El = document.getElementById('z2');
+  
   var deg2rad = Math.PI/180;
   
   function inputchanged(event) {
@@ -640,6 +655,14 @@ ZANDERIJ_1987_SURINAME 343
     lat2El.value = CD2.lat /  deg2rad;
     long2El.value = CD2.long / deg2rad;
     ele2El.value = CD2.ele;
+    var CC1 = CD2CC(orm1, rt1, long1, lat1, ele1, orm1, rt1);
+    x1El.value = CC1.x;
+    y1El.value = CC1.y;
+    z1El.value = CC1.z;
+    var CC1 = CD2CC(orm1, rt1, long1, lat1, ele1, orm2, rt2);
+    x2El.value = CC1.x;
+    y2El.value = CC1.y;
+    z2El.value = CC1.z;
   }
   
   function CD2CD (orm1, rt1, long1, lat1, ele1, orm2, rt2) {
@@ -665,6 +688,20 @@ ZANDERIJ_1987_SURINAME 343
     return CD;
   }
   
+  function CD2CC (orm1, rt1, long1, lat1, ele1, orm2, rt2) {
+    var CC = {};
+    var cd1Srf = Module.SRF_Celestiodetic.prototype.create(orm1, rt1);
+    var cc2Srf = Module.SRF_Celestiocentric.prototype.create(orm1, rt1);
+    var cd1Coord = cd1Srf.createCoordinate3D(long1, lat1, ele1);
+    var cc2Coord = cc2Srf.createCoordinate3D();
+    cc2Srf.changeCoordinate3DSRF(cd1Coord, cc2Coord);
+    var CoordCC2 = Module.castObject(cc2Coord, Coord3D_Celestiocentric);
+    CC.x = CoordCC2.get_u();
+    CC.y = CoordCC2.get_v();
+    CC.z = CoordCC2.get_w();
+    //release srfs
+    return CC;
+  }
   
 </script>
         
