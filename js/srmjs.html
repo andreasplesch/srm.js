@@ -646,10 +646,18 @@ ZANDERIJ_1987_SURINAME 343
     var CD = {};
     var cd1Srf = Module.SRF_Celestiodetic.prototype.create(orm1, rt1);
     var cd2Srf = Module.SRF_Celestiodetic.prototype.create(orm2, rt2);
+    var cc1Srf = Module.SRF_Celestiocentric.prototype.create(orm1, rt1);
+    var cc2Srf = Module.SRF_Celestiocentric.prototype.create(orm1, rt1);
     var cd1Coord = cd1Srf.createCoordinate3D(long1, lat1, ele1);
     var cd2Coord = cd2Srf.createCoordinate3D();
+    var cc1Coord = cc1Srf.createCoordinate3D();
+    var cc2Coord = cc2Srf.createCoordinate3D();
     cd2Srf.changeCoordinate3DSRF(cd1Coord, cd2Coord);
+    cc1Srf.changeCoordinate3DSRF(cd1Coord, cc1Coord);
+    cc2Srf.changeCoordinate3DSRF(cd1Coord, cc2Coord);
     var CoordCD2 = Module.castObject(cd2Coord, Coord3D_Celestiodetic);
+    var CoordCC1 = Module.castObject(cc1Coord, Coord3D_Celestiocentric);
+    var CoordCC2 = Module.castObject(cc2Coord, Coord3D_Celestiocentric);
     CD.long = CoordCD2.get_longitude();
     CD.lat = CoordCD2.get_latitude();
     CD.ele = CoordCD2.get_ellipsoidal_height();
