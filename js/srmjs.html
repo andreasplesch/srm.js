@@ -144,8 +144,8 @@
 <h1>Datum to datum projection via srm </h1>
 <form id='coord_in' onchange='inputchanged(event);'>
 <fieldset> <legend>Input datum and coordinates</legend>
-<span> ORM code: <input class='ddd' type='number' id='orm1' size='3' default='250'  value='250' placeholder='250'></span>
-<span> RT code: <input class='ddd' type='number' id='rt1' size='3' default='341' value='341' placeholder='341'></span>
+<span> ORM code: <input class='ddd' type='number' id='orm1' size='3' default='250'   placeholder='250'></span>
+<span> RT code: <input class='ddd' type='number' id='rt1' size='3' default='341'  placeholder='341'></span>
 <span> latitude: <input class='ddd' type='number' id='latitude1' size='3' value='0' min='-90' max='90'>degrees</span>
 <span> longitude: <input class='ddd' type='number' id='longitude1' size='3' value='0' min='-180' max='180'>degrees</span>
 <span> elevation: <input class='ddd' type='number' id='elevation1' size='3' value='0'>meter</span>
@@ -154,8 +154,8 @@
 </form>
 <form id='coord_out'> 
 <fieldset> <legend> Output datum and coordinates </legend>
-<span> ORM code: <input class='ddd' type='number' id='orm2' size='3' default='162' value='162' placeholder='162'></span>
-<span> RT code: <input class='ddd' type='number' id='rt2' size='3' default='193' value='193' placeholder='193'></span>
+<span> ORM code: <input class='ddd' type='number' id='orm2' size='3' default='162'  placeholder='162'></span>
+<span> RT code: <input class='ddd' type='number' id='rt2' size='3' default='193'  placeholder='193'></span>
 <span> latitude: <input class='ddd' type='number' id='latitude2' size='3' value='0' min='-90' max='90'>degrees</span>
 <span> longitude: <input class='ddd' type='number' id='longitude2' size='3' value='0' min='-180' max='180'>degrees</span>
 <span> elevation: <input class='ddd' type='number' id='elevation2' size='3' value='0'>meter</span>
@@ -655,6 +655,11 @@ ZANDERIJ_1987_SURINAME 343
   var z2El = document.getElementById('z2');
   
   var deg2rad = Math.PI/180;
+  
+  orm1El.value = orm1El.defaultValue;
+  rt1El.value = rt1El.defaultValue;
+  orm2El.value = orm2El.defaultValue;
+  rt2El.value = rt2El.defaultValue;
   
   function inputchanged(event) {
     var orm1 = orm1El.valueAsNumber;
