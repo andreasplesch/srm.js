@@ -143,7 +143,7 @@
 <span> ORM code: <input class='ddd' type='number' id='orm1' size='3' default='250'  value='250' placeholder='250'></span>
 <span> RT code: <input class='ddd' type='number' id='rt1' size='3' default='341' value='341' placeholder='341'></span>
 <span> latitude: <input class='ddd' type='number' id='latitude1' size='3' value='0' min='-90' max='90'>degrees</span>
-<span> longitude: <input class='ddd' type='number' id='longitude1' size='3' value='0' min='0' max='360'>degrees</span>
+<span> longitude: <input class='ddd' type='number' id='longitude1' size='3' value='0' min='-180' max='180'>degrees</span>
 <span> elevation: <input class='ddd' type='number' id='elevation1' size='3' value='0'>meter</span>
 <button>update</button>
 </fieldset>
@@ -153,7 +153,7 @@
 <span> ORM code: <input class='ddd' type='number' id='orm2' size='3' default='162' value='162' placeholder='162'></span>
 <span> RT code: <input class='ddd' type='number' id='rt2' size='3' default='193' value='193' placeholder='193'></span>
 <span> latitude: <input class='ddd' type='number' id='latitude2' size='3' value='0' min='-90' max='90'>degrees</span>
-<span> longitude: <input class='ddd' type='number' id='longitude2' size='3' value='0' min='0' max='360'>degrees</span>
+<span> longitude: <input class='ddd' type='number' id='longitude2' size='3' value='0' min='-180' max='180'>degrees</span>
 <span> elevation: <input class='ddd' type='number' id='elevation2' size='3' value='0'>meter</span>
 <button>update</button>
 </fieldset>
@@ -174,6 +174,12 @@
 <span> Z: <input type='number' id='z2' readonly> meter</span>
 </fieldset>
 </form>
+<div>
+  The default input ORM code (250) and RT code (341) define the WGS 1984 ellipsoid and datum.
+  The default output ORM code (162) and RT code (193) define the NAD 1927 ellipsoid and datum for the continental US.
+  The table below lists all available codes. For any ORM code there are only a few RT codes which are associated. 
+  RT codes begin with the label of the ORM code with which they are associated.
+</div>
 <textarea class="bigtable">
 RT CODE                ORM CODE
 -------------------------------
