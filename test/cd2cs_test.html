@@ -298,7 +298,7 @@
             return cdSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
         var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
-        var gcCoords = gdCoords.map(function(gd) {
+        gcCoords = gdCoords.map(function(gd) {
             var gc = ccSrf.createCoordinate3D();
             ccSrf.changeCoordinate3DSRF(gd, gc);
             return gc;
