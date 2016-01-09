@@ -200,7 +200,7 @@
     </script>
     <script>
         (function() {
-          var memoryInitializer = 'srmjs.mem';
+          var memoryInitializer = '../js/srmjs.mem';
           if (typeof Module['locateFile'] === 'function') {
             memoryInitializer = Module['locateFile'](memoryInitializer);
           } else if (Module['memoryInitializerPrefixURL']) {
@@ -212,7 +212,7 @@
           xhr.send(null);
         })();
         var script = document.createElement('script');
-        script.src = "srmjs.js";
+        script.src = "../js/srmjs.js";
         document.body.appendChild(script);
 </script>
 
