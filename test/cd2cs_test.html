@@ -290,8 +290,9 @@
             //check if all are numbers; should get rid of header
             if (row.some(function(d){return isNaN(d * 0);})) {return null;}
             console.log('row: ' + row);
-            var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
-            return ccSrf.createCoordinate3D(row[0], row[1], row[2]);
+            return row;
+            //var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
+            //return ccSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
         
         readgeodetic();
