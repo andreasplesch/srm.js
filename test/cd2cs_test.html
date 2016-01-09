@@ -321,7 +321,7 @@
             var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
             var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
             var cdCoor = cdSrf.createCoordinate3D(gd[0], gd[1], gd[2]);
-            var ccCoor = ccSrf.createCoordinate3D();
+            var ccCoor = ccSrf.createCoordinate3D(0, 0, 0);
             ccSrf.changeCoordinate3DSRF(cdCoor, ccCoor);
             var gc = [];
             var ccCoor3D = Module.castObject(ccCoor, Coord3D_Celestiocentric);
