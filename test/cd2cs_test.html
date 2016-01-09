@@ -285,7 +285,6 @@
         });
         
         readgeodetic();
-        diffCoords(gcCoords, gcCoordsGold);
             
         //perhaps put reading/ testing here
         });
@@ -293,7 +292,7 @@
       function readgeodetic() {
       // read file and transform
       d3.text('global_3D/WGS84/geodetic_101.csv', function (error, d) {
-        console.log('error: ' + error);
+        Module.setStatus("loading geodetic_101");
         var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
         var commasv = d3.dsv(",", "text/plain");
         var gdCoords = commasv.parseRows(d, function (row, index) {
@@ -308,6 +307,9 @@
             ccSrf.changeCoordinate3DSRF(gd, gc);
             return gc;
         });
+        
+        //now all should be loaded
+        diffCoords(gcCoords, gcCoordsGold);
         
         //console.log(gdcoords.toString());
         //construct scale
