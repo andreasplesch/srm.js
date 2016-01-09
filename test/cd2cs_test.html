@@ -137,6 +137,9 @@
       var progressElement = document.getElementById('progress');
       var spinnerElement = document.getElementById('spinner');
       var Module = {
+        onRuntimeInitialized: function() {
+            do_test(); // after ready
+            }
         preRun: [],
         postRun: [],
         print: (function() {
@@ -239,6 +242,8 @@
       <span id='samplelist'></span>
     </div>
     <script>
+    function do_test() {
+    
     /*
       function CD2CC (orm1, rt1, long1, lat1, ele1, orm2, rt2) {
         var CC = {};
@@ -335,7 +340,7 @@
         spans.exit().remove();
       }
       
-      
+    }  
     </script>
     
   </body>
