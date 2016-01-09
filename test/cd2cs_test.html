@@ -271,8 +271,9 @@
       var wgs84_rt = 341;
       var wgs84_orm = 250;
       var wgs84_rt = 341;
-        var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
-        var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
+      //srfs are per coordinate
+        //var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
+        //var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
         var gcCoordsGold = [];
         var gcCoords = [];
         var gdCoords = [];
@@ -289,6 +290,7 @@
             //check if all are numbers; should get rid of header
             if (row.some(function(d){return isNaN(d * 0);})) {return null;}
             console.log('row: ' + row);
+            var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
             return ccSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
         
@@ -301,7 +303,6 @@
       // read file and transform
       d3.text('global_3D/WGS84/geodetic_101.csv', function (error, d) {
         Module.setStatus("loading geodetic_101");
-        var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
         var commasv = d3.dsv(",", "text/plain");
         var gdCoords = commasv.parseRows(d, function (row, index) {
              //expect exactly three values 
@@ -309,10 +310,11 @@
             //check if all are numbers; should get rid of header
             if (row.some(function(d){return isNaN(d * 0);})) {return null;}
             console.log('row: ' + row);
+            var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
             return cdSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
-        var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
         gcCoords = gdCoords.map(function(gd) {
+            var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
             var gc = ccSrf.createCoordinate3D();
             ccSrf.changeCoordinate3DSRF(gd, gc);
             return gc;
