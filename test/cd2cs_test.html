@@ -274,7 +274,7 @@
       
       //read reference
       d3.text('global_3D/WGS84/rectangular_103.csv', function (error, d) {
-        console.log('error: ' + error);
+        Module.setStatus("loading rectangular_103");
         var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
         var commasv = d3.dsv(",", "text/plain");
         gcCoordsGold = commasv.parseRows(d, function (row, index) {
@@ -283,9 +283,14 @@
             console.log('row: ' + row);
             return ccSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
+        
+        readgeodetic();
+        diffCoords(gcCoords, gcCoordsGold);
+            
         //perhaps put reading/ testing here
         });
       
+      function readgeodetic() {
       // read file and transform
       d3.text('global_3D/WGS84/geodetic_101.csv', function (error, d) {
         console.log('error: ' + error);
@@ -304,9 +309,6 @@
             return gc;
         });
         
-        //compare with reference
-        diffCoords(gcCoords, gcCoordsGold);
-        
         //console.log(gdcoords.toString());
         //construct scale
         //1/length stride leads to floating point precision issues
@@ -320,6 +322,7 @@
         //updateCbar(cbar2, crange2, bar_width/samples);
         //updateHexList(hexheader, hexlist, crange2);
       });
+      }
       
       function diffCoords(gc, gcRef) {
           Module.arguments = 'testing ..';
