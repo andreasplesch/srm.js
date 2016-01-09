@@ -290,7 +290,8 @@
             //check if all are numbers; should get rid of header
             if (row.some(function(d){return isNaN(d * 0);})) {return null;}
             console.log('row: ' + row);
-            return row;
+            //convert to number
+            return row.map(function(n){return n * 1.0});
             //var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
             //return ccSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
@@ -311,7 +312,7 @@
             //check if all are numbers; should get rid of header
             if (row.some(function(d){return isNaN(d * 0);})) {return null;}
             console.log('row: ' + row);
-            return row;
+            return row.map(function(n){return n * 1.0});
             //var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
             //return cdSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
