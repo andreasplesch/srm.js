@@ -129,7 +129,10 @@
     <div class="emscripten" id="status">Downloading...</div>
     <div class="emscripten">
       <progress value="0" max="100" id="progress" hidden=1></progress>
-    </div><script type='text/javascript'>
+    </div>
+    <textarea id="output" rows="8"></textarea>
+    
+    <script type='text/javascript'>
       var statusElement = document.getElementById('status');
       var progressElement = document.getElementById('progress');
       var spinnerElement = document.getElementById('spinner');
@@ -259,44 +262,32 @@
       var hexheader = d3.select('#texheader');
       var samples = d3.select('#ncol_input').node().value;
       var cscale;
+      var wgs84_orm = 250;
+      var wgs84_rt = 341;
+      
       // read file
-      d3.text('topo_15lev.rgb.dat', function (error, d) {
+      d3.text('global_3D/WGS84/geodetic_101.csv', function (error, d) {
         console.log('error: ' + error);
-        var ssv = d3.dsv(" ", "text/plain");
-        var cmap = ssv.parseRows(d, function (row, index) {
-            //always ignore first two rows
-            if (index <2) {return null;}
-            
-            //remove empty elements; 
-            row = row.filter(function(d){return d !== "";});
-            //console.log('row: ' + row);
-            
-            //expect exactly three values for r,g,b 
-            if (row.length !== 3) {return null;}
-            
-            //check if all are numbers
+        var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs_rt);
+        var commasv = d3.dsv(",", "text/plain");
+        var gdcoords = commasv.parseRows(d, function (row, index) {
+            //check if all are numbers; should get rid of header
             if (row.some(function(d){return isNaN(d * 0);})) {return null;}
-            //console.log('row: ' + row);
-            
-            //check if fractional or decimal, larger 1 must be decimal
-            if (row.some(function(d){return d > 1 ;})) {return arr2col(row);}
-            //use dot to decide corner cases; if dot fractional
-            if (row.some(function(d){return d.indexOf(".") !== -1 ;})){return arr2col(row, 255);}
-            //should be decimal
-            return arr2col(row);
+            console.log('row: ' + row);
+            return cdSrf.createCoordinate3D(row[0], row[1], row[2]);;
         });
         
         //construct scale
         //1/length stride leads to floating point precision issues
         //go back to stride of 1
-        var crange1 = d3.range(0, cmap.length);
+        //var crange1 = d3.range(0, cmap.length);
         //var crange2 = d3.range(0, cmap.length, cmap.length/samples);
-        var crange2 = d3.range(0, samples).map(function(d){return d * cmap.length/samples;});  
-        cscale = d3.scale.linear().domain(crange1).range(cmap).interpolate(d3.interpolateHcl);
+        //var crange2 = d3.range(0, samples).map(function(d){return d * cmap.length/samples;});  
+        //cscale = d3.scale.linear().domain(crange1).range(cmap).interpolate(d3.interpolateHcl);
         //populate tables
-        updateCbar(cbar1, crange1, bar_width/cmap.length);
-        updateCbar(cbar2, crange2, bar_width/samples);
-        updateHexList(hexheader, hexlist, crange2);
+        //updateCbar(cbar1, crange1, bar_width/cmap.length);
+        //updateCbar(cbar2, crange2, bar_width/samples);
+        //updateHexList(hexheader, hexlist, crange2);
       });
       
       function updateTable(samples) {
