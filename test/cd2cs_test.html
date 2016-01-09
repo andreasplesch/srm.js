@@ -304,7 +304,7 @@
       d3.text('global_3D/WGS84/geodetic_101.csv', function (error, d) {
         Module.setStatus("loading geodetic_101");
         var commasv = d3.dsv(",", "text/plain");
-        var gdCoords = commasv.parseRows(d, function (row, index) {
+        gdCoords = commasv.parseRows(d, function (row, index) {
              //expect exactly three values 
             if (row.length !== 3) {return null;}
             //check if all are numbers; should get rid of header
