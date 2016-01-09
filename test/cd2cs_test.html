@@ -284,6 +284,8 @@
         //var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
         var commasv = d3.dsv(",", "text/plain");
         gcCoordsGold = commasv.parseRows(d, function (row, index) {
+             //expect exactly three values 
+            if (row.length !== 3) {return null;}
             //check if all are numbers; should get rid of header
             if (row.some(function(d){return isNaN(d * 0);})) {return null;}
             console.log('row: ' + row);
@@ -302,6 +304,8 @@
         var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
         var commasv = d3.dsv(",", "text/plain");
         var gdCoords = commasv.parseRows(d, function (row, index) {
+             //expect exactly three values 
+            if (row.length !== 3) {return null;}
             //check if all are numbers; should get rid of header
             if (row.some(function(d){return isNaN(d * 0);})) {return null;}
             console.log('row: ' + row);
