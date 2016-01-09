@@ -269,19 +269,28 @@
       var cscale;
       var wgs84_orm = 250;
       var wgs84_rt = 341;
+      var wgs84_orm = 250;
+      var wgs84_rt = 341;
       
-      // read file
+      // read file and transform
       d3.text('global_3D/WGS84/geodetic_101.csv', function (error, d) {
         console.log('error: ' + error);
         var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
         var commasv = d3.dsv(",", "text/plain");
-        var gdcoords = commasv.parseRows(d, function (row, index) {
+        var gdCoords = commasv.parseRows(d, function (row, index) {
             //check if all are numbers; should get rid of header
             if (row.some(function(d){return isNaN(d * 0);})) {return null;}
             console.log('row: ' + row);
-            return cdSrf.createCoordinate3D(row[0], row[1], row[2]);;
+            return cdSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
-        console.log(gdcoords.toString());
+        var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
+        var gcCoords = gdCoords.map(function(gd) {
+            var gc = ccSrf.createCoordinate3D();
+            ccSrf.changeCoordinate3DSRF(gd, gc);
+            return gc;
+        });
+        //compare with reference
+        //console.log(gdcoords.toString());
         //construct scale
         //1/length stride leads to floating point precision issues
         //go back to stride of 1
