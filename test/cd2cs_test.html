@@ -106,6 +106,7 @@
         margin: 5px;
       }
     </style>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   </head>
   <style>
     table {
@@ -124,7 +125,6 @@
     }
   </style>
   <body>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <div class="spinner" id='spinner'></div>
     <div class="emscripten" id="status">Downloading...</div>
     <div class="emscripten">
@@ -239,7 +239,7 @@
       <span id='samplelist'></span>
     </div>
     <script>
-    
+    /*
       function CD2CC (orm1, rt1, long1, lat1, ele1, orm2, rt2) {
         var CC = {};
         var cd1Srf = Module.SRF_Celestiodetic.prototype.create(orm1, rt1);
@@ -254,7 +254,7 @@
         //release srfs
         return CC;
       }
-      
+      */
       var bar_width=500;
       var cbar1 = d3.select('#originalmap');
       var cbar2 = d3.select('#sampledmap');
