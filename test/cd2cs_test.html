@@ -370,15 +370,21 @@
       }
       
       function diffCoords(gc, gcRef) {
+          var diff = [];
           printarea.value = "reference srmjs difference \n";
-          d3.zip(gcRef, gc).map(function(gcgc) {
+          var result = d3.zip(gcRef, gc)
+          diff = result.map(function(gcgc) {
+              var diff1 = [];
               printarea.value += gcgc[0] + " " + gcgc[1] + " ";
-              printarea.value += gcgc[0][0] - gcgc[1][0] + " ";
-              printarea.value += gcgc[0][1] - gcgc[1][1] + " ";
-              printarea.value += gcgc[0][2] - gcgc[1][2] + "\n";
+              diff[0] = gcgc[0][0] - gcgc[1][0]
+              printarea.value += diff[0] + " ";
+              diff[1] = gcgc[0][1] - gcgc[1][1]
+              printarea.value += diff[1] + " ";
+              diff[2] = gcgc[0][2] - gcgc[1][2]
+              printarea.value += diff[2] + "\n";
+              return diff1;
           });
       }
-       
       
       function updateTable(samples) {
         var cmaplength = cscale.range().length;
