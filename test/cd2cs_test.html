@@ -315,22 +315,30 @@
         });
         
         //now all should be loaded
-        diffCoords(gcCoords, d3.transpose(filteredCoords)[1]);
-        diffCoords(gdCoords, d3.transpose(filteredCoords)[0]);
+        var sumsqfunction = function(a, b){return a + b*b;};
+        var diffgc = diffCoords(gcCoords, d3.transpose(filteredCoords)[1], sumsqfunction);
+        //convert to good distance
+        var diffgd = diffCoords(gdCoords, d3.transpose(filteredCoords)[0], sumsqfunction);
+        printarea.value += 'SUMMARY CD to CC\n';
+        printarea.value += '------------------- \n';
+        printStat(diffgc);
+        printarea.value += 'SUMMARY CC to CD\n';
+        printarea.value += '------------------- \n';
+        printStat(diffgd);
         
       });
       }
       
-      function diffCoords(gc, gcRef) {
+      function diffCoords(gc, gcRef, sumsqfunction) {
           var diff = [];
-          printarea.value = "reference srmjs difference distance \n";
+          printarea.value += "reference srmjs difference distance \n";
           var result = d3.zip(gcRef, gc)
           diff = result.map(function(gcgc) {
               var diff1 = [];
               diff1[0] = gcgc[0][0] - gcgc[1][0];
               diff1[1] = gcgc[0][1] - gcgc[1][1];
               diff1[2] = gcgc[0][2] - gcgc[1][2];
-              var sumsq = diff1.reduce(function(a, b) {return a + b*b;}, 0);
+              var sumsq = diff1.reduce(sumsqfunction, 0);
               diff1[3] = Math.sqrt(sumsq);
               printarea.value += gcgc[0] + " " + gcgc[1] + " ";
               printarea.value += diff1[0] + " ";
@@ -340,10 +348,11 @@
               printarea.scrollTop = printarea.scrollHeight; // focus on bottom
               return diff1;
           });
-          printarea.value += 'SUMMARY CD to CC\n';
-          printarea.value += '------------------- \n';
-          printarea.value += 'abs. MAX delta X[m]: ' + d3.max(d3.transpose(diff)[0].map(function(x){return Math.abs(x);})) + "\n";
-          printarea.value += 'abs. MAX delta Y[m]: ' + d3.max(d3.transpose(diff)[1].map(function(x){return Math.abs(x);})) + "\n";
+          return diff;
+      }
+      function printStat(diff) {
+          printarea.value += 'abs. MAX delta X[m,deg]: ' + d3.max(d3.transpose(diff)[0].map(function(x){return Math.abs(x);})) + "\n";
+          printarea.value += 'abs. MAX delta Y[m,deg]: ' + d3.max(d3.transpose(diff)[1].map(function(x){return Math.abs(x);})) + "\n";
           printarea.value += 'abs. MAX delta Z[m]: ' + d3.max(d3.transpose(diff)[2].map(function(x){return Math.abs(x);})) + "\n";
           printarea.value += 'MAX distance[m]: ' + d3.max(d3.transpose(diff)[3]) + "\n";
           printarea.scrollTop = printarea.scrollHeight; // focus on bottom
