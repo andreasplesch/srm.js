@@ -354,7 +354,7 @@
       
       function diffCoords(gc, gcRef) {
           var diff = [];
-          printarea.value = "reference srmjs difference \n";
+          printarea.value = "reference srmjs difference distance \n";
           var result = d3.zip(gcRef, gc)
           diff = result.map(function(gcgc) {
               var diff1 = [];
@@ -366,7 +366,8 @@
               printarea.value += gcgc[0] + " " + gcgc[1] + " ";
               printarea.value += diff1[0] + " ";
               printarea.value += diff1[1] + " ";
-              printarea.value += diff1[2] + "\n";
+              printarea.value += diff1[2] + " ";
+              printarea.value += diff1[3] + "\n";
               printarea.scrollTop = printarea.scrollHeight; // focus on bottom
               return diff1;
           });
