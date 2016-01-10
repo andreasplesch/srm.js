@@ -335,14 +335,14 @@
         gdCoords = filteredCoords.map(function(gdgc) {
             var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
             var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
-            var ccCoor = ccSrf.createCoordinate3D(gdgc[1][0] * deg2rad, gdgc[1][1] * deg2rad, gdgc[1][2]);
+            var ccCoor = ccSrf.createCoordinate3D(gdgc[1][0], gdgc[1][1], gdgc[1][2]);
             var cdCoor = cdSrf.createCoordinate3D();
             //console.log(gdgc[0]);
             cdSrf.changeCoordinate3DSRF(ccCoor, cdCoor);
             var gd = [];
             var cdCoor3D = Module.castObject(cdCoor, Coord3D_Celestiodetic);
-            gd[0] = cdCoor3D.get_longitude();
-            gd[1] = cdCoor3D.get_latitude();
+            gd[0] = cdCoor3D.get_longitude()/deg2rad;
+            gd[1] = cdCoor3D.get_latitude()/deg2rad;
             gd[2] = cdCoor3D.get_ellipsoidal_height();
             //release srfs, free Coor
             Module.setStatus(gd.toString());
