@@ -350,7 +350,7 @@
         });
         
         //now all should be loaded
-        diffCoords(gcCoords, filteredCoords);
+        diffCoords(gcCoords, d3.transpose(filteredCoords)[1]);
         
         //console.log(gdcoords.toString());
         //construct scale
@@ -368,10 +368,6 @@
       }
       
       function diffCoords(gc, gcRef) {
-          Module.arguments = 'testing ..';
-          Module.print();
-          Module.arguments = gc;
-          Module.print();
           
       }
       
