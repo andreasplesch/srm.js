@@ -120,10 +120,7 @@
       padding-left: 0;
       border: 0px;
     }
-    body {
-      font-family: monospace;
-      font-size: 14;
-    }
+    
   </style>
   <body>
     <div class="spinner" id='spinner'></div>
@@ -392,8 +389,8 @@
           printarea.value += 'SUMMARY CD to CC\n';
           printarea.value += '------------------- \n';
           printarea.value += 'abs. MAX delta X[m]: ' + d3.max(d3.transpose(diff)[0].map(function(x){return Math.abs(x);})) + "\n";
-          printarea.value += 'abs. MAX delta Y[m]: ' + d3.max(d3.transpose(diff)[1]).map(function(x){return Math.abs(x);}) + "\n";
-          printarea.value += 'abs. MAX delta Z[m]: ' + d3.max(d3.transpose(diff)[2]).map(function(x){return Math.abs(x);}) + "\n";
+          printarea.value += 'abs. MAX delta Y[m]: ' + d3.max(d3.transpose(diff)[1].map(function(x){return Math.abs(x);})) + "\n";
+          printarea.value += 'abs. MAX delta Z[m]: ' + d3.max(d3.transpose(diff)[2].map(function(x){return Math.abs(x);})) + "\n";
           printarea.value += 'MAX distance[m]: ' + d3.max(d3.transpose(diff)[3]) + "\n";
           printarea.scrollTop = printarea.scrollHeight; // focus on bottom
       }
