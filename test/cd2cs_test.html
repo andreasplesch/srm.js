@@ -245,22 +245,6 @@
     <script>
     function do_test() {
     
-    /*
-      function CD2CC (orm1, rt1, long1, lat1, ele1, orm2, rt2) {
-        var CC = {};
-        var cd1Srf = Module.SRF_Celestiodetic.prototype.create(orm1, rt1);
-        var cc2Srf = Module.SRF_Celestiocentric.prototype.create(orm1, rt1);
-        var cd1Coord = cd1Srf.createCoordinate3D(long1, lat1, ele1);
-        var cc2Coord = cc2Srf.createCoordinate3D();
-        cc2Srf.changeCoordinate3DSRF(cd1Coord, cc2Coord);
-        var CoordCC2 = Module.castObject(cc2Coord, Coord3D_Celestiocentric);
-        CC.x = CoordCC2.get_u();
-        CC.y = CoordCC2.get_v();
-        CC.z = CoordCC2.get_w();
-        //release srfs
-        return CC;
-      }
-      */
       var bar_width=500;
       var cbar1 = d3.select('#originalmap');
       var cbar2 = d3.select('#sampledmap');
@@ -269,8 +253,6 @@
       var samples = d3.select('#ncol_input').node().value;
       var cscale;
       var printarea = document.getElementById('output');
-      var wgs84_orm = 250;
-      var wgs84_rt = 341;
       var wgs84_orm = 250;
       var wgs84_rt = 341;
       //srfs are per coordinate
@@ -376,15 +358,22 @@
           var result = d3.zip(gcRef, gc)
           diff = result.map(function(gcgc) {
               var diff1 = [];
+              diff1[0] = gcgc[0][0] - gcgc[1][0];
+              diff1[1] = gcgc[0][1] - gcgc[1][1];
+              diff1[2] = gcgc[0][2] - gcgc[1][2];
+              var sumsq = diff1.reduce(function(a, b) {return a + b*b;});
+              diff1[3] = Math.sqrt(sumsq);
               printarea.value += gcgc[0] + " " + gcgc[1] + " ";
-              diff[0] = gcgc[0][0] - gcgc[1][0]
-              printarea.value += diff[0] + " ";
-              diff[1] = gcgc[0][1] - gcgc[1][1]
-              printarea.value += diff[1] + " ";
-              diff[2] = gcgc[0][2] - gcgc[1][2]
-              printarea.value += diff[2] + "\n";
+              printarea.value += diff1[0] + " ";
+              printarea.value += diff1[1] + " ";
+              printarea.value += diff1[2] + "\n";
               return diff1;
           });
+          printarea.value += 'SUMMARY \n';
+          printarea.value += 'MAX delta X: ' + d3.max(d3.transpose(diff)[0]);
+          printarea.value += 'MAX delta Y: ' + d3.max(d3.transpose(diff)[1]);
+          printarea.value += 'MAX delta Z: ' + d3.max(d3.transpose(diff)[2]);
+          printarea.value += 'MAX distance: ' + d3.max(d3.transpose(diff)[3]);
       }
       
       function updateTable(samples) {
