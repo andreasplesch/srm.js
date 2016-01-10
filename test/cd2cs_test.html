@@ -277,6 +277,9 @@
         var gcCoordsGold = [];
         var gcCoords = [];
         var gdCoords = [];
+        var filteredCoords = [];
+        var GD_HEIGHT_MIN = -50000; //SRM General Profile accuracy domain
+        var GD_HEIGHT_MAX = 1000000; //exceptions if outside
         var deg2rad = Math.PI / 180;
         
         
@@ -318,10 +321,15 @@
             //return cdSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
         
-        gcCoords = gdCoords.map(function(gd) {
+        filteredCoords = d3.zip(gdcoords, gcCoordsGold).filter(
+            function(gdgc) {
+                return gdgc[0][2] > GD_HEIGHT_MIN && gdgc[0][2] < GD_HEIGHT_MAX;
+            });
+        
+        gcCoords = filteredCoords.map(function(gdgc) {
             var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
             var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
-            var cdCoor = cdSrf.createCoordinate3D(gd[0] * deg2rad, gd[1] * deg2rad, gd[2]);
+            var cdCoor = cdSrf.createCoordinate3D(gdgc[0][0] * deg2rad, gdgc[0][1] * deg2rad, gdgc[0][2]);
             var ccCoor = ccSrf.createCoordinate3D(0, 0, 0);
             ccSrf.changeCoordinate3DSRF(cdCoor, ccCoor);
             var gc = [];
@@ -334,7 +342,7 @@
         });
         
         //now all should be loaded
-        diffCoords(gcCoords, gcCoordsGold);
+        diffCoords(gcCoords, filteredCoords);
         
         //console.log(gdcoords.toString());
         //construct scale
