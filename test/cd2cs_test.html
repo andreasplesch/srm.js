@@ -361,7 +361,7 @@
               diff1[0] = gcgc[0][0] - gcgc[1][0];
               diff1[1] = gcgc[0][1] - gcgc[1][1];
               diff1[2] = gcgc[0][2] - gcgc[1][2];
-              var sumsq = diff1.reduce(function(a, b) {return a + b*b;});
+              var sumsq = diff1.reduce(function(a, b) {return a + b*b;}, 0);
               diff1[3] = Math.sqrt(sumsq);
               printarea.value += gcgc[0] + " " + gcgc[1] + " ";
               printarea.value += diff1[0] + " ";
