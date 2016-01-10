@@ -75,7 +75,7 @@
       }
       #output {
         width: 100%;
-        height: 200px;
+        height: 300px;
         margin: 0 auto;
         margin-top: 10px;
         border-left: 0px;
@@ -352,18 +352,6 @@
         //now all should be loaded
         diffCoords(gcCoords, d3.transpose(filteredCoords)[1]);
         
-        //console.log(gdcoords.toString());
-        //construct scale
-        //1/length stride leads to floating point precision issues
-        //go back to stride of 1
-        //var crange1 = d3.range(0, cmap.length);
-        //var crange2 = d3.range(0, cmap.length, cmap.length/samples);
-        //var crange2 = d3.range(0, samples).map(function(d){return d * cmap.length/samples;});  
-        //cscale = d3.scale.linear().domain(crange1).range(cmap).interpolate(d3.interpolateHcl);
-        //populate tables
-        //updateCbar(cbar1, crange1, bar_width/cmap.length);
-        //updateCbar(cbar2, crange2, bar_width/samples);
-        //updateHexList(hexheader, hexlist, crange2);
       });
       }
       
@@ -393,51 +381,6 @@
           printarea.value += 'abs. MAX delta Z[m]: ' + d3.max(d3.transpose(diff)[2].map(function(x){return Math.abs(x);})) + "\n";
           printarea.value += 'MAX distance[m]: ' + d3.max(d3.transpose(diff)[3]) + "\n";
           printarea.scrollTop = printarea.scrollHeight; // focus on bottom
-      }
-      
-      function updateTable(samples) {
-        var cmaplength = cscale.range().length;
-        var crange2 = d3.range(0, samples).map(function(d){return d * cmaplength/samples;});
-        updateCbar(cbar2, crange2, bar_width/samples);
-        updateHexList(hexheader, hexlist, crange2);
-      }
-      
-      function arr2col(arr, mul) {
-          if (mul == undefined) {mul = 1;}
-          return d3.rgb(arr[0] * mul, arr[1] * mul, arr[2] * mul);
-        }  
-      
-      function adjust_cell_size (position, cell_size) {
-          //position: column index of cell
-          //cell_size: average cell_size
-          //px_cell_size: truncated cell_size in pixels
-          //cell_gap: fractional gap to average target cell size
-          //adjust width by 1 in positions which need to even out total width
-          var px_cell_size = Math.floor(cell_size);
-          var cell_gap = cell_size - px_cell_size;
-          return ((position+1) * cell_gap)%1 < cell_gap ? px_cell_size+1 : px_cell_size;
-        };
-      
-      function updateCbar (cbar, range, cell_size) {
-        var cells = cbar.selectAll('td').data(range)
-          .style({
-          'background-color': function(d) {return cscale(d);}, 
-          'padding-right': function(d, i) {
-            return adjust_cell_size(i, cell_size);}});
-        cells.enter().append('td')
-          .style({
-          'background-color': function(d) {return cscale(d);},
-          'padding-right': function(d, i) {
-            return adjust_cell_size(i, cell_size);}});
-        cells.exit().remove();
-      }
-      
-      function updateHexList(header, container, range) {
-        header.text(range.length + " 1 3");
-        var spans = container.selectAll('span').data(range)
-          .text(function(d){return " " + cscale(d);});
-        spans.enter().append('span').text(function(d){return " " + cscale(d);});
-        spans.exit().remove();
       }
       
     }  
