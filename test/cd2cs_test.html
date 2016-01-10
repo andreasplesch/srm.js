@@ -281,6 +281,7 @@
         var GD_HEIGHT_MIN = -50000; //SRM General Profile accuracy domain
         var GD_HEIGHT_MAX = 1000000; //exceptions if outside
         var deg2rad = Math.PI / 180;
+        var HEIGHT_EPS = 200;
         
         
       //read reference
@@ -323,7 +324,7 @@
         
         filteredCoords = d3.zip(gdCoords, gcCoordsGold).filter(
             function(gdgc) {
-                return gdgc[0][2] > GD_HEIGHT_MIN && gdgc[0][2] < GD_HEIGHT_MAX;
+                return gdgc[0][2] > (GD_HEIGHT_MIN + HEIGHT_EPS) && gdgc[0][2] < (GD_HEIGHT_MAX - HEIGHT_EPS);
             });
         
         gcCoords = filteredCoords.map(function(gdgc) {
