@@ -372,10 +372,10 @@
           });
           printarea.value += 'SUMMARY \n';
           printarea.value += '------------------- \n';
-          printarea.value += 'MAX delta X: ' + d3.max(d3.transpose(diff)[0]);
-          printarea.value += 'MAX delta Y: ' + d3.max(d3.transpose(diff)[1]);
-          printarea.value += 'MAX delta Z: ' + d3.max(d3.transpose(diff)[2]);
-          printarea.value += 'MAX distance: ' + d3.max(d3.transpose(diff)[3]);
+          printarea.value += 'MAX delta X: ' + d3.max(d3.transpose(diff)[0]) + "\n";
+          printarea.value += 'MAX delta Y: ' + d3.max(d3.transpose(diff)[1]) + "\n";
+          printarea.value += 'MAX delta Z: ' + d3.max(d3.transpose(diff)[2]) + "\n";
+          printarea.value += 'MAX distance: ' + d3.max(d3.transpose(diff)[3]) + "\n";
           printarea.scrollTop = printarea.scrollHeight; // focus on bottom
       }
       
