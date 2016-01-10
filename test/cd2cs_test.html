@@ -352,6 +352,7 @@
           return diff;
       }
       function printStat(diff) {
+          printarea.value += 'Number of locations validated: ' + diff.length + "\n";
           printarea.value += 'abs. MAX delta X[m,deg]: ' + d3.max(d3.transpose(diff)[0].map(function(x){return Math.abs(x);})) + "\n";
           printarea.value += 'abs. MAX delta Y[m,deg]: ' + d3.max(d3.transpose(diff)[1].map(function(x){return Math.abs(x);})) + "\n";
           printarea.value += 'abs. MAX delta Z[m]: ' + d3.max(d3.transpose(diff)[2].map(function(x){return Math.abs(x);})) + "\n";
