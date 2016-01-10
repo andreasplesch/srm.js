@@ -267,7 +267,7 @@
       var hexheader = d3.select('#texheader');
       var samples = d3.select('#ncol_input').node().value;
       var cscale;
-      var printarea = d3.select('#output');
+      var printarea = document.getElementById('output');
       var wgs84_orm = 250;
       var wgs84_rt = 341;
       var wgs84_orm = 250;
@@ -347,6 +347,7 @@
             gc[1] = ccCoor3D.get_v();
             gc[2] = ccCoor3D.get_w();
             //release srfs, free Coor
+            Module.setStatus(gc);
             return gc;
         });
         
@@ -369,10 +370,15 @@
       }
       
       function diffCoords(gc, gcRef) {
-          printarea.text("reference srmjs difference");
-          //var printarea.selectAll('textarea').data(d3.zip(gcRef, gc)).
-          
+          printarea.value = "reference srmjs difference \n";
+          d3.zip(gcRef, gc).map(function(gcgc) {
+              printarea.value += gcgc[0] + " " + gcgc[1] + " ";
+              printarea.value += gcgc[0][0] - gcgc[1][0] + " ";
+              printarea.value += gcgc[0][1] - gcgc[1][1] + " ";
+              printarea.value += gcgc[0][2] - gcgc[1][2] + "\n";
+          });
       }
+       
       
       function updateTable(samples) {
         var cmaplength = cscale.range().length;
