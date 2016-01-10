@@ -109,19 +109,6 @@
     </style>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   </head>
-  <style>
-    table {
-      border-spacing: 0px;
-      border: 1px solid grey;
-      margin: 20px;
-    }
-    td {
-      padding-top: 40;
-      padding-left: 0;
-      border: 0px;
-    }
-    
-  </style>
   <body>
     <div class="spinner" id='spinner'></div>
     <div class="emscripten" id="status">Downloading...</div>
@@ -221,24 +208,6 @@
 </script>
 
 <h1>Test srm.js using global_3d gold data</h1>
-    original table
-    <table><tr id='originalmap'></tr></table>
-    <div>
-      Resample for a new table with the desired number of colors:
-    </div>
-    <label for='ncol_input'>number of colors:</label>
-    <input type='number' id='ncol_input' min='2' max='100' value='5' oninput='updateTable(value)'/>
-    <div>
-      Resampled color table:
-    </div>
-    <table><tr id='sampledmap'></tr></table>
-    
-    As 1d pixel texture:
-    
-    <div>
-      <span id='texheader'></span>
-      <span id='samplelist'></span>
-    </div>
     <script>
     function do_test() {
     
