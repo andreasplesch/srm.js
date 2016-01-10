@@ -207,17 +207,13 @@
         document.body.appendChild(script);
 </script>
 
-<h1>Test srm.js using global_3d gold data</h1>
+<h1>Validate srm.js wih global_3d gold data</h1>
+<div>
+    
+</div>
     <script>
     function do_test() {
     
-      var bar_width=500;
-      var cbar1 = d3.select('#originalmap');
-      var cbar2 = d3.select('#sampledmap');
-      var hexlist = d3.select('#samplelist');
-      var hexheader = d3.select('#texheader');
-      var samples = d3.select('#ncol_input').node().value;
-      var cscale;
       var printarea = document.getElementById('output');
       var wgs84_orm = 250;
       var wgs84_rt = 341;
