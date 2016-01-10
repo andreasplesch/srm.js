@@ -319,6 +319,12 @@
         var sumsqfunction = function(diff){return diff.reduce(function(a, b){return a + b*b;},0)};
         var diffgc = diffCoords(gcCoords, d3.transpose(filteredCoords)[1], sumsqfunction);
         //convert to good distance
+        var sumsqfunction = function(diff){
+            var dst = Math.pow(diff[0] * 110000, 2);
+            dst += Math.pow(diff[1] * 110000, 2);
+            dst += Math.pow(diff[2], 2);
+            return Math.sqrt(dst);
+        };
         var diffgd = diffCoords(gdCoords, d3.transpose(filteredCoords)[0], sumsqfunction);
         printarea.value += 'SUMMARY CD to CC\n';
         printarea.value += '------------------- \n';
