@@ -371,12 +371,12 @@
               printarea.scrollTop = printarea.scrollHeight; // focus on bottom
               return diff1;
           });
-          printarea.value += 'SUMMARY \n';
+          printarea.value += 'SUMMARY CD to CC\n';
           printarea.value += '------------------- \n';
-          printarea.value += 'MAX delta X: ' + d3.max(d3.transpose(diff)[0]) + "\n";
-          printarea.value += 'MAX delta Y: ' + d3.max(d3.transpose(diff)[1]) + "\n";
-          printarea.value += 'MAX delta Z: ' + d3.max(d3.transpose(diff)[2]) + "\n";
-          printarea.value += 'MAX distance: ' + d3.max(d3.transpose(diff)[3]) + "\n";
+          printarea.value += 'abs. MAX delta X[m]: ' + d3.max(d3.transpose(diff)[0].map(function(x){return Math.abs(x);})) + "\n";
+          printarea.value += 'abs. MAX delta Y[m]: ' + d3.max(d3.transpose(diff)[1]).map(function(x){return Math.abs(x);}) + "\n";
+          printarea.value += 'abs. MAX delta Z[m]: ' + d3.max(d3.transpose(diff)[2]).map(function(x){return Math.abs(x);}) + "\n";
+          printarea.value += 'MAX distance[m]: ' + d3.max(d3.transpose(diff)[3]) + "\n";
           printarea.scrollTop = printarea.scrollHeight; // focus on bottom
       }
       
