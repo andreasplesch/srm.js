@@ -321,7 +321,7 @@
             //return cdSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
         
-        filteredCoords = d3.zip(gdcoords, gcCoordsGold).filter(
+        filteredCoords = d3.zip(gdCoords, gcCoordsGold).filter(
             function(gdgc) {
                 return gdgc[0][2] > GD_HEIGHT_MIN && gdgc[0][2] < GD_HEIGHT_MAX;
             });
