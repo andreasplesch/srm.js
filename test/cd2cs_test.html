@@ -267,6 +267,7 @@
       var hexheader = d3.select('#texheader');
       var samples = d3.select('#ncol_input').node().value;
       var cscale;
+      var printarea = d3.select('#output');
       var wgs84_orm = 250;
       var wgs84_rt = 341;
       var wgs84_orm = 250;
@@ -368,6 +369,8 @@
       }
       
       function diffCoords(gc, gcRef) {
+          printarea.text("reference srmjs difference");
+          //var printarea.selectAll('textarea').data(d3.zip(gcRef, gc)).
           
       }
       
