@@ -322,6 +322,12 @@
             //return cdSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
         
+        //set longitude to 0 at poles, srm does not like other longitudes
+        gdCoords = gdCoords.map(function(gd) {
+            if (Math.abs(gd[1]) == 90) { gd[0] = 0; }
+            return gd;
+        });
+        
         filteredCoords = d3.zip(gdCoords, gcCoordsGold).filter(
             function(gdgc) {
                 return gdgc[0][2] > (GD_HEIGHT_MIN + HEIGHT_EPS) && gdgc[0][2] < (GD_HEIGHT_MAX - HEIGHT_EPS);
