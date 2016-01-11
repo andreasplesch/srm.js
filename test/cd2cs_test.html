@@ -323,7 +323,7 @@
             var dst = Math.pow(diff[0] * deg2rad * 6371000 * Math.cos(gcgc[0][1]), 2);
             dst += Math.pow(diff[1] * deg2rad * 6371000, 2);
             dst += Math.pow(diff[2], 2);
-            return Math.sqrt(dst);
+            return dst;
         };
         var diffgd = diffCoords(gdCoords, d3.transpose(filteredCoords)[0], sumsqfunction);
         printarea.value += 'SUMMARY CD to CC\n';
