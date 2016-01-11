@@ -275,6 +275,7 @@
             if (Math.abs(gd[1]) == 90) { gd[0] = 0; }
             return gd;
         });
+        //now all should be loaded
         
         filteredCoords = d3.zip(gdCoords2, gcCoordsGold).filter(
             function(gdgc) {
@@ -317,7 +318,6 @@
             return gd;
         });
         
-        //now all should be loaded
         
         var sumsqfunction = function(diff, gcgc){return diff.reduce(function(a, b){return a + b*b;},0)};
         var diffgc = diffCoords(gcCoords, d3.transpose(filteredCoords)[1], sumsqfunction);
