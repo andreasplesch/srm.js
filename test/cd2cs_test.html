@@ -316,12 +316,12 @@
         
         //now all should be loaded
         
-        var sumsqfunction = function(diff){return diff.reduce(function(a, b){return a + b*b;},0)};
+        var sumsqfunction = function(diff, gcgc){return diff.reduce(function(a, b){return a + b*b;},0)};
         var diffgc = diffCoords(gcCoords, d3.transpose(filteredCoords)[1], sumsqfunction);
         //convert to good distance
-        var sumsqfunction = function(diff){
-            var dst = Math.pow(diff[0] * 110000, 2);
-            dst += Math.pow(diff[1] * 110000, 2);
+        var sumsqfunction = function(diff, gcgc){
+            var dst = Math.pow(diff[0] * deg2rad * 6371000 * Math.cos(gcgc[0][1]), 2);
+            dst += Math.pow(diff[1] * deg2rad * 6371000, 2);
             dst += Math.pow(diff[2], 2);
             return Math.sqrt(dst);
         };
@@ -345,7 +345,7 @@
               diff1[0] = gcgc[0][0] - gcgc[1][0];
               diff1[1] = gcgc[0][1] - gcgc[1][1];
               diff1[2] = gcgc[0][2] - gcgc[1][2];
-              var sumsq = sumsqfunction(diff1);
+              var sumsq = sumsqfunction(diff1, gcgc);
               diff1[3] = Math.sqrt(sumsq);
               printarea.value += gcgc[0] + " " + gcgc[1] + " ";
               printarea.value += diff1[0] + " ";
