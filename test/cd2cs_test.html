@@ -248,10 +248,11 @@
             //return ccSrf.createCoordinate3D(row[0], row[1], row[2]);
         });
         
-        readgeodetic();
             
         //perhaps put reading/ testing here
-        });
+        } (
+            readgeodetic();
+        ));
       
       function readgeodetic() {
       // read file and transform
@@ -280,6 +281,8 @@
                 return gdgc[0][2] > (GD_HEIGHT_MIN + HEIGHT_EPS) && gdgc[0][2] < (GD_HEIGHT_MAX - HEIGHT_EPS);
             });
         
+        Module.setStatus("converting ...");
+            
         gcCoords = filteredCoords.map(function(gdgc) {
             var cdSrf = Module.SRF_Celestiodetic.prototype.create(wgs84_orm, wgs84_rt);
             var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
@@ -293,7 +296,7 @@
             gc[1] = ccCoor3D.get_v();
             gc[2] = ccCoor3D.get_w();
             //release srfs, free Coor
-            Module.setStatus(gc.toString());
+            //Module.setStatus(gc.toString());
             return gc;
         });
         
@@ -310,7 +313,7 @@
             gd[1] = cdCoor3D.get_latitude()/deg2rad;
             gd[2] = cdCoor3D.get_ellipsoidal_height();
             //release srfs, free Coor
-            Module.setStatus(gd.toString());
+            //Module.setStatus(gd.toString());
             return gd;
         });
         
