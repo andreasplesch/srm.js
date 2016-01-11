@@ -232,7 +232,7 @@
         
         
       //read reference
-      d3.text('global_3D/WGS84/rectangular_103.csv', function (error, d) {
+      d3.text('global_3D/WGS84/rectangular_103.csv', (function (error, d) {
         Module.setStatus("loading rectangular_103");
         //var ccSrf = Module.SRF_Celestiocentric.prototype.create(wgs84_orm, wgs84_rt);
         var commasv = d3.dsv(",", "text/plain");
@@ -252,7 +252,7 @@
         //perhaps put reading/ testing here
         } 
             readgeodetic();
-        );
+        ));
       
       function readgeodetic() {
       // read file and transform
